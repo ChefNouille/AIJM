@@ -44,7 +44,7 @@ if (isset($_POST['nom']))
 	else 
 	{
 		$type='PROFESSEUR';
-		$insert=$sql->prepare('INSERT INTO users( Nom, Prenom, Mail, Type, Login, Password, Verifmail)
+		$insert=$sql->prepare('INSERT INTO utilisateur( Nom, Prenom, Mail, Type, Identifiant, Motdepasse, VerifMail)
 		VALUES (:nom, :prenom, :mail, :type, :login, :mdp, :token)');
 		$insert->execute(array(
 			'nom' => $_POST['nom'],
