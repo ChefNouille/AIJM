@@ -110,7 +110,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	//$nom=str_replace('&sp;',' ',$_POST['nom']);
 	if ($_POST['type']=="COULEURS")
 	{
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, Refnoir, Refmagenta, Refjaune, Refcyan, Stocknoir, Stockmagenta, Stockjaune, Stockcyan) 
+		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, RefMagenta, RefJaune, RefCyan, QuantNoir, QuantMagenta, QuantJaune, QuantCyan) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :refmagenta, :refjaune, :refcyan, :stocknoir, :stockmagenta, :stockjaune, :stockcyan)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -131,7 +131,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	if ($_POST['type']=="NOIR")
 	{
 		
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, Refnoir, Stocknoir) 
+		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, QuantNoir) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :stocknoir)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -145,7 +145,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	
 	if ($_POST['type']=="TROISCOULEURS")
 	{
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, Refnoir, Reftroiscouleurs, Stocknoir, Stocktroiscouleurs) 
+		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, RefTroiscouleurs, QuantNoir, QuantTroiscouleurs) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :reftrois, :stocknoir, :stocktrois)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -188,7 +188,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="4")
 	for ($i=1;$i<=$nombre;$i++)
 	{
 		
-		$insert=$sql->prepare('INSERT INTO imp_nom_salle( IDPrinter, Nom, Salle) 
+		$insert=$sql->prepare('INSERT INTO imprimante_emplacement( imprimante_idimprimante, ImpNom, Salle) 
 		VALUES (:idprinter, :nom, :salle)');
 		$insert->execute(array(
 			'idprinter' => $id,
