@@ -3,7 +3,7 @@ require_once'fonctions.php';
 require 'authentification_verification.php'; // Page authentifiee
 
 
-$response = $sql->query('SELECT * from imprimantes WHERE IDPRinter=\''.$_GET['id'].'\'');
+$response = $sql->query('SELECT * from imprimante WHERE idImprimante=\''.$_GET['id'].'\'');
 while ($donnees = $response->fetch())
 {
 		
@@ -11,16 +11,16 @@ while ($donnees = $response->fetch())
 	$modele=$donnees['Modele'];
 	$type=$donnees['Type'];
 	$nombre=$donnees['Nombre'];
-	$stocknoir=$donnees['Stocknoir'];
-	$stocktroiscouleurs=$donnees['Stocktroiscouleurs'];
-	$stockmagenta=$donnees['Stockmagenta'];
-	$stockjaune=$donnees['Stockjaune'];
-	$stockcyan=$donnees['Stockcyan'];
-	$reftrois=$donnees['Reftroiscouleurs'];
-	$refnoir=$donnees['Refnoir'];
-	$refmagenta=$donnees['Refmagenta'];
-	$refjaune=$donnees['Refjaune'];
-	$refcyan=$donnees['Refcyan'];
+	$stocknoir=$donnees['QuantNoir'];
+	$stocktroiscouleurs=$donnees['QuantTroiscouleurs'];
+	$stockmagenta=$donnees['QuantMagenta'];
+	$stockjaune=$donnees['QuantJaune'];
+	$stockcyan=$donnees['QuantCyan'];
+	$reftrois=$donnees['RefTroiscouleurs'];
+	$refnoir=$donnees['RefNoir'];
+	$refmagenta=$donnees['RefMagenta'];
+	$refjaune=$donnees['RefJaune'];
+	$refcyan=$donnees['RefCyan'];
 	$Fnom=$donnees['FournisseurNom'];
 	$Ftel=$donnees['FournisseurTel'];
 	$Fmail=$donnees['FournisseurMail'];
@@ -30,7 +30,7 @@ while ($donnees = $response->fetch())
 echo '<h1>'.$marque.' '.$modele.'</h1><br><br>';
 echo '<h2>Consommables:</h2>';
 
-echo'<form method="post" action="acceuil.php?page=update_stocks">';
+echo'<form method="post" action="accueil.php?page=update_stocks">';
 echo '<table>';
 echo '<tr>
 <th>Couleur</th>
@@ -89,19 +89,24 @@ echo '<p>Nom: '.$Fnom.'<br>
 Téléphone: '.$Ftel.'<br>
 E-mail: '.$Fmail.'<br>
 Site Web: <a href="'.$Furl.'">'.$Furl.'</a><br>
-<button><a  href="acceuil.php?page=edit_fournisseur&amp;id='.$_GET['id'].'">Modifier</a></button></p>';
+<button><a  href="accueil.php?page=edit_fournisseur&amp;id='.$_GET['id'].'">Modifier</a></button></p>';
 
 
-echo '<h2>Salles:</h2>';
-echo '<table>';
-echo '<tr>
-<th>Salle</th>
-<th>Nom</th></tr>';
-$response = $sql->query('SELECT * from imp_nom_salle WHERE IDPRinter=\''.$_GET['id'].'\'');
-while ($donnees = $response->fetch())
+
+$response = $sql->query('SELECT * from imprimante_emplacement WHERE idImprimante=\''.$_GET['id'].'\'');
+if ($response)
 {
+	echo '<h2>Salles:</h2>';
+	echo '<table>';
+	echo '<tr>
+	<th>Salle</th>
+	<th>Nom</th></tr>';
+	while ($donnees = $response->fetch())
+	{
 		
-	echo '<tr><td>'.$donnees['Salle'].'</td>
-	<td>'.$donnees['Nom'].'</td></tr>';
+		echo '<tr><td>'.$donnees['Salle'].'</td>
+		<td>'.$donnees['ImpNom'].'</td></tr>';
+	}	
 }
+
 ?>

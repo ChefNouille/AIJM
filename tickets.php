@@ -7,11 +7,11 @@ Créer le tableau des tickets
 ******************************************************/
 ?>
 <form method="post" action="accueil.php?page=creation_ticket">
-<button class="w3-button w3-block color-blue">Effectuer un signalement</button>
+<button class="w3-button w3-lef-align color-blue">Effectuer un signalement</button>
 </form>
 <h1> Lister les tickets </h1>
 <?php
-$response = $sql->query('SELECT * from tickets ORDER BY Statut DESC, Datecrea DESC');
+$response = $sql->query('SELECT * from ticket ORDER BY Statut DESC, DateCreation DESC');
 
 if ($_SESSION['type']=="ADMINISTRATEUR")
 {
@@ -42,7 +42,7 @@ if ($_SESSION['type']=="ADMINISTRATEUR")
 		}
 		
 		echo '<tr class="'.$classe.'">';
-		echo '<td>'.$donnees['Datecrea'].'</td>';
+		echo '<td>'.affDate($donnees['DateCreation']).'</td>';
 		echo '<td>'.$donnees['Nom'].'</td>';
 		echo '<td>'.$donnees['Salle'].'</td>';
 		echo '<td>'.$donnees['Priorite'].'</td>';
@@ -50,8 +50,8 @@ if ($_SESSION['type']=="ADMINISTRATEUR")
 		echo '<td>'.$donnees['Description'].'</td>';
 		echo '<td>'.$donnees['Commentaire'].'</td>';
 		echo '<td>'.$donnees['Statut'].'</td>';
-		echo '<td>'.$donnees['Datefin'].'</td>';
-		echo '<td><a href="acceuil.php?page=editer_ticket&amp;id='.$donnees['IDTicket'].'">Modifier</a></td></tr>';
+		echo '<td>'.affDate($donnees['DateFermeture']).'</td>';
+		echo '<td><a href="accueil.php?page=editer_ticket&amp;id='.$donnees['idTicket'].'">Modifier</a></td></tr>';
 	}
 	echo '</table><br><br>';
 }
@@ -83,7 +83,7 @@ else
 			$classe="w3-light-grey";
 		}
 		echo '<tr class="'.$classe.'">';
-		echo '<td>'.$donnees['Datecrea'].'</td>';
+		echo '<td>'.affDate($donnees['DateCreation']).'</td>';
 		echo '<td>'.$donnees['Nom'].'</td>';
 		echo '<td>'.$donnees['Salle'].'</td>';
 		echo '<td>'.$donnees['Priorite'].'</td>';
@@ -91,7 +91,7 @@ else
 		echo '<td>'.$donnees['Description'].'</td>';
 		echo '<td>'.$donnees['Commentaire'].'</td>';
 		echo '<td>'.$donnees['Statut'].'</td>';
-		echo '<td>'.$donnees['Datefin'].'</td></tr>';
+		echo '<td>'.affDate($donnees['DateFermeture']).'</td></tr>';
 	}
 	echo '</table><br><br>';
 }
@@ -101,7 +101,7 @@ if (isset($_SESSION['nom']))
 	?>
 	<h1> Vos tickets </h1>
 	<?php
-	$response = $sql->query('SELECT * from tickets WHERE Nom= \''.$_SESSION['nom'].'\'ORDER BY Statut DESC, Datecrea DESC');
+	$response = $sql->query('SELECT * from ticket WHERE Nom= \''.$_SESSION['nom'].'\'ORDER BY Statut DESC, DateCreation DESC');
 	if ($response)
 	{
 		
@@ -131,7 +131,7 @@ if (isset($_SESSION['nom']))
 				$classe="w3-light-grey";
 			}
 			echo '<tr class="'.$classe.'">';
-			echo '<td>'.$donnees['Datecrea'].'</td>';
+			echo '<td>'.affDate($donnees['DateCreation']).'</td>';
 			echo '<td>'.$donnees['Nom'].'</td>';
 			echo '<td>'.$donnees['Salle'].'</td>';
 			echo '<td>'.$donnees['Priorite'].'</td>';
@@ -139,7 +139,7 @@ if (isset($_SESSION['nom']))
 			echo '<td>'.$donnees['Description'].'</td>';
 			echo '<td>'.$donnees['Commentaire'].'</td>';
 			echo '<td>'.$donnees['Statut'].'</td>';
-			echo '<td>'.$donnees['Datefin'].'</td></tr>';
+			echo '<td>'.affDate($donnees['DateFermeture']).'</td></tr>';
 		}
 		echo '</table><br><br>';
 	}

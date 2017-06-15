@@ -23,7 +23,7 @@ body,.w3-table, input, h6, .w3-button {font-family: "Cabin", sans-serif;}
     <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>
 	<img src="images/logo.png" alt="Smiley face" height="74" width="118">
   </div>
-  <div class="w3-padding-64 w3-large color-text-white" style="font-weight:bold">
+  <div class="w3-padding-64 w3-large color-text-white " style="font-weight:bold">
 		<?php
 		session_start();
 		require_once'fonctions.php';
@@ -81,10 +81,10 @@ body,.w3-table, input, h6, .w3-button {font-family: "Cabin", sans-serif;}
   <div class="w3-hide-large" style="margin-top:83px"></div>
   
   <!-- Top header -->
-  <header class="w3-container w3-xlarge">
+  <header class="w3-container w3-large">
     <p class="w3-left">Version de développpement</p>
 	<form method="post" action="accueil.php?page=deconnexion">
-<button class="w3-button w3-block color-blue">Deconnexion</button>
+<button class="w3-button w3-right color-blue">Deconnexion</button>
 </form>
   </header>
 

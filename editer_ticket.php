@@ -1,5 +1,5 @@
 ﻿<?php
-require'fonctions.php';
+require_once'fonctions.php';
 require 'authentification_verification.php'; // Page authentifiee
 if (!isset($_POST['commentaire']))
 {
@@ -10,7 +10,7 @@ if (!isset($_POST['commentaire']))
 Rappel du ticket traité
 ******************************************************/
 	echo '<h2> Récapitulatif </h2>';
-	$response = $sql->query('SELECT * from tickets WHERE IDTicket='.$_GET['id'].'');
+	$response = $sql->query('SELECT * from ticket WHERE idTicket='.$_GET['id'].'');
 	
 	echo '<table>';
 	echo '<tr><th>n°</th>
@@ -28,8 +28,8 @@ Rappel du ticket traité
 	while ($donnees = $response->fetch())
 	{
 		echo '<tr>';
-		echo '<td>'.$donnees['IDTicket'].'</td>';
-		echo '<td>'.$donnees['Datecrea'].'</td>';
+		echo '<td>'.$donnees['idTicket'].'</td>';
+		echo '<td>'.$donnees['DateCreation'].'</td>';
 		echo '<td>'.$donnees['Nom'].'</td>';
 		echo '<td>'.$donnees['Salle'].'</td>';
 		echo '<td>'.$donnees['Priorite'].'</td>';
@@ -37,7 +37,7 @@ Rappel du ticket traité
 		echo '<td>'.$donnees['Description'].'</td>';
 		echo '<td>'.$donnees['Commentaire'].'</td>';
 		echo '<td>'.$donnees['Statut'].'</td>';
-		echo '<td>'.$donnees['Datefin'].'</td>';
+		echo '<td>'.$donnees['DateFermeture'].'</td>';
 		$commentaire=$donnees['Commentaire'];
 		$note=$donnees['Note'];
 		echo '<td>'.$note.'</td></tr>';
@@ -49,7 +49,7 @@ Forumulaire
 ******************************************************/
 
 	echo '<h2> Modifications </h2>';
-	echo '<form method="post" action="acceuil.php?page=editer_ticket">	
+	echo '<form method="post" action="accueil.php?page=editer_ticket">	
 	<label for="commentaire">Commentaire:</label><br>
 	<textarea name="commentaire" row="12" cols="45">
 	'.$commentaire.'
@@ -78,11 +78,11 @@ if (isset($_POST['commentaire']))
 	if (isset($_POST['statut'])=="on")
 	{
 		$statut='Clos';
-		$req = $sql->prepare('UPDATE tickets SET Commentaire = :commentaire, Statut = :statut, Datefin = :date, Note = :note WHERE IDTicket = :id');
+		$req = $sql->prepare('UPDATE ticket SET Commentaire = :commentaire, Statut = :statut, DateFermeture = :dateend, Note = :note WHERE idTicket = :id');
 		$req->execute(array(
 			'commentaire' => $commentaire,
 			'statut' => $statut,
-			'date' => date('Y-m-d'),
+			'dateend' => date('Y-m-d'),
 			'note' => $note,
 			'id' => $id
 			));
@@ -90,7 +90,7 @@ if (isset($_POST['commentaire']))
 	else
 	{
 		$statut='En cours';
-		$req = $sql->prepare('UPDATE tickets SET Commentaire = :commentaire, Statut = :statut, Note = :note WHERE IDTicket = :id');
+		$req = $sql->prepare('UPDATE ticket SET Commentaire = :commentaire, Statut = :statut, Note = :note WHERE idTicket = :id');
 		$req->execute(array(
 			'commentaire' => $commentaire,
 			'statut' => $statut,

@@ -12,7 +12,7 @@ Définir la marque, le modèle, le type et le nombre
 if (!isset($_POST['etape']))
 {
 	echo 'Etape 1:
-	<form method="post" action="acceuil.php?page=creation_imprimante">
+	<form method="post" action="accueil.php?page=creation_imprimante">
 	<label for="marque">Marque:</label><br>
 	<input class="w3-input w3-border" type="text" name="marque"><br>
 	<label for="modele">Modele:</label><br>
@@ -39,7 +39,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="2")
 	{
 		
 		echo 'Etape 2:
-		<form method="post" action="acceuil.php?page=creation_imprimante">
+		<form method="post" action="accueil.php?page=creation_imprimante">
 		<label for="ref">Reference noir:</label><br>
 		<input type="text" name="refnoir"><br>
 		<label for="stock">Stocks noir:</label><br>
@@ -54,7 +54,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="2")
 	if ($_POST['type']=="TROISCOULEURS")
 	{
 		echo 'Etape 2:
-		<form method="post" action="acceuil.php?page=creation_imprimante">
+		<form method="post" action="accueil.php?page=creation_imprimante">
 		<label for="ref">Reference noir:</label><br>
 		<input type="text" name="refnoir"><br>
 		<label for="stock">Stocks noir:</label><br>
@@ -73,7 +73,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="2")
 	if ($_POST['type']=="COULEURS")
 	{
 		echo 'Etape 2:
-		<form method="post" action="acceuil.php?page=creation_imprimante">
+		<form method="post" action="accueil.php?page=creation_imprimante">
 		<label for="ref">Reference noir:</label><br>
 		<input type="text" name="refnoir"><br>
 		<label for="stock">Stocks noir:</label><br>
@@ -110,7 +110,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	//$nom=str_replace('&sp;',' ',$_POST['nom']);
 	if ($_POST['type']=="COULEURS")
 	{
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, RefMagenta, RefJaune, RefCyan, QuantNoir, QuantMagenta, QuantJaune, QuantCyan) 
+		$insert=$sql->prepare('INSERT INTO imprimante( Marque, Modele, Type, Nombre, RefNoir, RefMagenta, RefJaune, RefCyan, QuantNoir, QuantMagenta, QuantJaune, QuantCyan) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :refmagenta, :refjaune, :refcyan, :stocknoir, :stockmagenta, :stockjaune, :stockcyan)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -131,7 +131,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	if ($_POST['type']=="NOIR")
 	{
 		
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, QuantNoir) 
+		$insert=$sql->prepare('INSERT INTO imprimante( Marque, Modele, Type, Nombre, RefNoir, QuantNoir) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :stocknoir)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -145,7 +145,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	
 	if ($_POST['type']=="TROISCOULEURS")
 	{
-		$insert=$sql->prepare('INSERT INTO imprimantes( Marque, Modele, Type, Nombre, RefNoir, RefTroiscouleurs, QuantNoir, QuantTroiscouleurs) 
+		$insert=$sql->prepare('INSERT INTO imprimante( Marque, Modele, Type, Nombre, RefNoir, RefTroiscouleurs, QuantNoir, QuantTroiscouleurs) 
 		VALUES (:marque, :modele, :type, :nombre, :refnoir, :reftrois, :stocknoir, :stocktrois)');
 		$insert->execute(array(
 			'marque' => $_POST['marque'],
@@ -162,7 +162,7 @@ if (isset($_POST['etape']) && $_POST['etape']=="3")
 	$nombre=$_POST['nombre'];
 	echo 'Etape 3:<br>
 	Veuillez renseigner le nom et la salle de chacune des '.$nombre.' imprimantes<br><br>';
-	echo'<form method="post" action="acceuil.php?page=creation_imprimante">';
+	echo'<form method="post" action="accueil.php?page=creation_imprimante">';
 	for ($i=1;$i<=$nombre;$i++)
 	{
 		echo 'Imprimante n°'.$i.'<br>';

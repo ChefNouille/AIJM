@@ -5,10 +5,15 @@ require 'authentification_verification.php'; // Page authentifiee
 /******************************************************
 Créer le tableau des imprimantes
 ******************************************************/
-echo '<button><span><a href="accueil.php?page=creation_imprimante">Ajouter une nouvelle imprimante</a></span></button>';
+?>
+<form method="post" action="accueil.php?page=creation_imprimante">
+<button class="w3-button w3-lef-align color-blue">Ajouter un nouveau modèle</button>
+</form>
+<?php
+
 echo '<h1> Lister les imprimantes </h1>';
 
-$response = $sql->query('SELECT * from imprimantes');
+$response = $sql->query('SELECT * from imprimante');
 
 
 echo '<table class="w3-table w3-centered">';
@@ -29,11 +34,11 @@ while ($donnees = $response->fetch())
 	echo '<td>'.$donnees['Modele'].'</td>';
 	echo '<td>'.$donnees['Nombre'].'</td>';
 	echo '<td>'.$donnees['Type'].'</td>';
-	echo '<td>'.$donnees['Stocknoir'].'</td>';
-	echo '<td>'.$donnees['Stocktroiscouleurs'].'</td>';
-	echo '<td>'.$donnees['Stockmagenta'].'</td>';
-	echo '<td>'.$donnees['Stockjaune'].'</td>';
-	echo '<td>'.$donnees['Stockcyan'].'</td>';
-	echo '<td><a href="acceuil.php?page=details_imprimante&amp;id='.$donnees['IDPrinter'].'">Détails / Modifications</a></td></tr>';
+	echo '<td>'.$donnees['QuantNoir'].'</td>';
+	echo '<td>'.$donnees['QuantTroiscouleurs'].'</td>';
+	echo '<td>'.$donnees['QuantMagenta'].'</td>';
+	echo '<td>'.$donnees['QuantJaune'].'</td>';
+	echo '<td>'.$donnees['QuantCyan'].'</td>';
+	echo '<td><a href="accueil.php?page=details_imprimante&amp;id='.$donnees['idImprimante'].'">Détails / Modifications</a></td></tr>';
 }
 echo '</table><br><br>';

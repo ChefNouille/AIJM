@@ -25,7 +25,7 @@ if(!empty($_POST))
 		//calcul du MD5 du mot de passe saisi
 		$Md5MdpSaisi=$_POST['mdp'];
 		// Verifions qu'il existe un couple d'identifiants (Login/Mdp) correspondant en BDD
-	  	$req = $sql->prepare('SELECT * FROM users WHERE Login = ? AND Password = ?'); 	// preparation
+	  	$req = $sql->prepare('SELECT * FROM utilisateur WHERE Identifiant = ? AND Motdepasse = ?'); 	// preparation
 		$req->execute(array($LoginSaisi,$Md5MdpSaisi));											//on execute la requete pour le couple login/mdp
 		$lignes = $req->fetchAll(); 															//$lignes contient les resultats sous forme d'un tableau.
 		$nb_ligne = count($lignes); 															//$nb_ligne contient le nombres de lignes résultats  (0 = pas de resultat 1= un compte trouvé 2 = !!!!!)
@@ -42,7 +42,7 @@ if(!empty($_POST))
 				$_SESSION['prenom']=$ligne['Prenom'];
 				$_SESSION['email']=$ligne['Mail'];
 				$_SESSION['type']=$ligne['Type'];
-				$_SESSION['login']=$ligne['Login'];
+				$_SESSION['login']=$ligne['Identifiant'];
 			}
 			// On redirige vers l'interface "utilisateurs".
 			redirection('accueil.php');
@@ -73,7 +73,7 @@ if(!empty($_POST))
           <label for="login">Utilisateur :</label><br>
           <input type="text" name="login" id="login" value="" size="30" maxlength="30"/>
 		  <br>
-          <label for="mdp">mdp :</label> <br>
+          <label for="mdp">Mot de passe :</label> <br>
           <input type="password" name="mdp" id="mdp" value="" size="30" maxlength="30"/> 
           <br><br>
 		  <input type="submit" name="submit" value="Se connecter" />

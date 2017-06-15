@@ -8,7 +8,7 @@ if (isset($_POST['type'])=="NOIR")
 	{
 		$stocknoir=$_POST['stocknoir'];
 		$id=$_POST['id'];
-		$req = $sql->prepare('UPDATE imprimantes SET Stocknoir = :stocknoir WHERE IDPrinter = :id');
+		$req = $sql->prepare('UPDATE imprimante SET QuantNoir = :stocknoir WHERE idImprimante = :id');
 		$req->execute(array(
 			'stocknoir' => $stocknoir,
 			'id' => $id
@@ -20,7 +20,7 @@ if (isset($_POST['type'])=="TROISCOULEURS")
 		$stocknoir=$_POST['stocknoir'];
 		$stocktroiscouleurs=$_POST['stocktroiscouleurs'];
 		$id=$_POST['id'];
-		$req = $sql->prepare('UPDATE imprimantes SET Stocknoir = :stocknoir, Stocktroiscouleurs = :stocktrois WHERE IDPrinter = :id');
+		$req = $sql->prepare('UPDATE imprimante SET QuantNoir = :stocknoir, QuantTroiscouleurs = :stocktrois WHERE idImprimante = :id');
 		$req->execute(array(
 			'stocknoir' => $stocknoir,
 			'stocktrois' => $stocktroiscouleurs,
@@ -34,7 +34,7 @@ if (isset($_POST['type'])=="COULEURS")
 		$stockjaune=$_POST['stockjaune'];
 		$stockcyan=$_POST['stockcyan'];
 		$id=$_POST['id'];
-		$req = $sql->prepare('UPDATE imprimantes SET Stocknoir = :stocknoir, Stockmagenta = :stockmagenta, Stockjaune = :stockjaune, Stockcyan = :stockcyan WHERE IDPrinter = :id');
+		$req = $sql->prepare('UPDATE imprimante SET QuantNoir = :stocknoir, QuantMagenta = :stockmagenta, QuantJaune = :stockjaune, QuantCyan = :stockcyan WHERE idImprimante = :id');
 		$req->execute(array(
 			'stocknoir' => $stocknoir,
 			'stockmagenta' => $stockmagenta,
@@ -47,7 +47,7 @@ if (isset($_POST['type'])=="COULEURS")
 
 	
 	
-$url = 'acceuil.php?page=imprimantes';
+$url = 'accueil.php?page=imprimantes';
 $url = html_entity_decode($url);
 header('Location: '.$url);
 exit();

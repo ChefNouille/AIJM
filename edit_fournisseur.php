@@ -4,7 +4,7 @@ require 'authentification_verification.php'; // Page authentifiee
 
 if (!isset($_POST['nom']))
 {
-	$response = $sql->query('SELECT FournisseurNom, FournisseurTel, FournisseurMail, FournisseurUrl from imprimantes WHERE IDPRinter=\''.$_GET['id'].'\'');
+	$response = $sql->query('SELECT FournisseurNom, FournisseurTel, FournisseurMail, FournisseurUrl from imprimante WHERE idImprimante=\''.$_GET['id'].'\'');
 	while ($donnees = $response->fetch())
 	{
 		
@@ -36,7 +36,7 @@ if (!isset($_POST['nom']))
 if (isset($_POST['nom']))
 {
 	
-	$req = $sql->prepare('UPDATE imprimantes SET FournisseurNom = :fnom, FournisseurTel = :ftel, FournisseurMail = :fmail, FournisseurUrl = :furl WHERE IDPrinter = :id');
+	$req = $sql->prepare('UPDATE imprimante SET FournisseurNom = :fnom, FournisseurTel = :ftel, FournisseurMail = :fmail, FournisseurUrl = :furl WHERE IDPrinter = :id');
 	$req->execute(array(
 	'fnom'=> $_POST['nom'],
 	'ftel'=> $_POST['tel'],

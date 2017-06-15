@@ -4,11 +4,14 @@ require 'authentification_verification.php'; // Page authentifiee
 /******************************************************
 Forumulaire
 ******************************************************/
-echo '<button><a href="acceuil.php?page=tickets">Retour</a></button>';
+
+echo '<form method="post" action="accueil.php?page=tickets">
+<button class="w3-button color-blue><a href="accueil.php?page=tickets">Retour</a></button>
+</form>';
 if (!isset($_POST['description']))
 {
 	echo '<h1> Créer un Ticket </h1>';
-	echo '<form method="post" action="acceuil.php?page=creation_ticket">
+	echo '<form method="post" action="accueil.php?page=creation_ticket">
 	<label for="priorite">Priorité:</label><br><select name="priorite">
 		<option value="Urgent">Urgent</option>
 		<option value="Normal">Normal</option>
@@ -30,21 +33,24 @@ if (!isset($_POST['description']))
 /******************************************************
 Enregistrement dans la base de données
 ******************************************************/
+
 if (isset($_POST['description']))
 {
 	
-	$insert=$sql->prepare('INSERT INTO tickets( Nom, Datecrea, Type, Priorite, Salle, Description, Commentaire, Statut) VALUES (:IDUser, :Datecrea, :Type, :Priorite, :Salle, :Description, :Commentaire, :Statut)');
+	$nom=$_SESSION['nom'];
+	$insert=$sql->prepare('INSERT INTO ticket( Nom, DateCreation, Type, Priorite, Salle, Description, Statut) 
+	VALUES (:IDUser, :Datecrea, :Type, :Priorite, :Salle, :Description, :Statut)');
 	$insert->execute(array(
-		'IDUser' => '2',
+		'IDUser' => $nom,
 		'Datecrea' => date('Y-m-d'),
 		'Type' => $_POST['type'],
 		'Priorite' => $_POST['priorite'],
 		'Salle'=> $_POST['salle'],
 		'Description' => $_POST['description'],
-		'Commentaire'=>'',
 		'Statut' => 'Nouveau'
 		));
 		
 	echo 'Votre signalement a bien était effectué';
+	echo $_SESSION['nom'];
 }
 ?>
